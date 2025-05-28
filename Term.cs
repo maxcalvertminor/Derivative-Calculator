@@ -1,9 +1,12 @@
+using System.ComponentModel.Design;
+using System.Numerics;
+
 public class Term {
     public string term;
 
     public Term numba1;
     public Term numba2;
-    public char operator;
+    public char operato;
     public string derivative;
 
     public float coefficient;
@@ -11,7 +14,10 @@ public class Term {
     public float exponent;
 
     public bool singularFunction;
-    public int specialDerivativeID;
+    public static string[,] specialDerivatives = {
+        {"cos(x)", "sin(x)", "tan(x)", "sec(x)", "csc(x)", "cot(x)", "ln(x)"},
+        {"-sin(x)", "cos(x)", "sec^2(x)", "sec(x) * tan(x)", "-csc(x) * cot(x)", "-csc^2(x)", "1/x"}
+    };
 
     public Term(string t) {
         term = t;
@@ -20,69 +26,92 @@ public class Term {
 
     public void Differentiate() {
         SplitTerm();
-        switch(operator) {
-            case "+":
+        switch(operato) {
+            case '+':
                 derivative = numba1.derivative + "+" + numba2.derivative;
                 break;
-            case "-":
+            case '-':
                 derivative = numba1.derivative + "-" + numba2.derivative;
                 break;
-            case "*":
-                derivative = "("numba1.derivate + "*" + numba2 + ")+(" + numba1 + "*" + numba2.derivative + ")";
+            case '*':
+                derivative = "(" + numba1.derivative + "*" + numba2.term + ")+(" + numba1.term + "*" + numba2.derivative + ")";
                 break;
-            case "/":
+            case '/':
+                derivative = "((" + numba2.term + "*" + numba1.derivative + ")-(" + numba1.term + "*" + numba2.derivative + ")/(" + numba2.term + "^2)";
                 break;
-            case "f":
+            case 'f':
                 derivative = FindComponents();
                 break;
         }
     }
     public void SplitTerm() {
         int parentheseCount = 0;
-        for(int i = 0; i < term.length; i++) {
-            if(term[i] == "(") {
+        for(int i = 0; i < term.Length; i++) {
+            if(term[i] == '(') {
                 parentheseCount++;
             }
-            if(term[i] == ")") {
+            if(term[i] == ')') {
                 parentheseCount--;
             }
 
             if(parentheseCount == 0) {
-                if(term[i] == "*" || term[i] == "/" || term[i] == "+" || term[i] == "-") {
+                if(term[i] == '*' || term[i] == '/' || term[i] == '+' || term[i] == '-') {
                     numba1 = new Term(term.Substring(0, i));
                     numba2 = new Term(term.Substring(i + 1));
-                    operator = term[i];
+                    operato = term[i];
                 }
             }
         }
         if(numba1 == null || numba2 == null) {
-            if(term[0] == "(" && term[term.length - 1] == ")") {
-                term = term.Substring(1, term.length - 2);
+            if(term[0] == '(' && term[term.Length - 1] == ')') {
+                term = term.Substring(1, term.Length - 2);
                 SplitTerm();
-            } else {
-                operator = "f";
-                singularFunction = true;
+                } else {
+                    operato = 'f';
+                    singularFunction = true;
+                }
             }
         }
-    }
     public string FindComponents() {
-        for(int i = 0; i < specialDerivatives[0].length; i++) {
-            if(term.equals(specialDerivatives[0, i])) {
-                return specialDerivatives[1, i];
+        for(int sp = 0; sp < 2; sp++) {
+            if(term.Equals(specialDerivatives[0, sp])) {
+                return specialDerivatives[1, sp];
             }
         }
         int i = 0;
-        while(Char.isDigit(term[i]) == true) {
+        while(i < term.Length && Char.IsDigit(term[i]) == true) {
             i++;
         }
-        coefficient = term.Substring(0, i);
+        if(i > 0) 
+            coefficient = float.Parse(term.Substring(0, i));
+        else 
+            coefficient = 1;
         
         int r = i;
-        while(Char.isLetter(term[i]) == true) {
+        while(i < term.Length && Char.IsLetter(term[i]) == true) {
             i++;
         }
-        variable = term.Substring(r, i - r);
+        if(i > r) 
+            variable = Convert.ToChar(term.Substring(r, i - r));
+        else 
+            variable = '?';
 
+        if(variable == '?') {
+            return "0";
+        } else {
+            exponent = 1;
+        }
+        if (term.IndexOf("^") == -1) {
+            return "" + coefficient * exponent;
+        }
+        else {
+            exponent = float.Parse(term.Substring(term.IndexOf("^") + 1));
+        }
+
+        if(variable != Derivative.withRespectTo) {
+            return "" + (coefficient * exponent) + variable + "^" + (exponent - 1) + "*(d" + variable + "/d" + Derivative.withRespectTo + ")";
+        }
+        
 
         return "" + (coefficient * exponent) + variable + "^" + (exponent - 1);
     }
