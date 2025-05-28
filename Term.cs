@@ -1,3 +1,8 @@
+// term file, which recursively breaks down the differentiand into terms,
+// then assumes every term is made from two subsequent terms, and so on and so forth,
+// until every term consists of simple differentiable functions. Then it works from the bottom,
+// finding derivatives of more complicated terms based on relationships of smaller ones.
+
 using System.ComponentModel.Design;
 using System.Numerics;
 

@@ -1,3 +1,6 @@
+// derivate class, which is the main script for the differentiand. Seperates the original
+// differentiand, starts the term mitosis, then returns the final result to the console.
+
 public class Derivative {
     public Term differentiand;
     public List<Term> terms;
