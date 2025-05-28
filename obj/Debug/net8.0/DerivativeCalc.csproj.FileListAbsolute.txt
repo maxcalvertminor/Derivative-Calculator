@@ -1,0 +1,15 @@
+/workspaces/Derivative-Calculator/bin/Debug/net8.0/DerivativeCalc
+/workspaces/Derivative-Calculator/bin/Debug/net8.0/DerivativeCalc.deps.json
+/workspaces/Derivative-Calculator/bin/Debug/net8.0/DerivativeCalc.runtimeconfig.json
+/workspaces/Derivative-Calculator/bin/Debug/net8.0/DerivativeCalc.dll
+/workspaces/Derivative-Calculator/bin/Debug/net8.0/DerivativeCalc.pdb
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.AssemblyInfoInputs.cache
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.AssemblyInfo.cs
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.csproj.CoreCompileInputs.cache
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.sourcelink.json
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.dll
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/refint/DerivativeCalc.dll
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.pdb
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/DerivativeCalc.genruntimeconfig.cache
+/workspaces/Derivative-Calculator/obj/Debug/net8.0/ref/DerivativeCalc.dll
