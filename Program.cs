@@ -7,7 +7,7 @@ string function = "6x^2 + 3y^4";
 //                                         ↓↓↓
 Console.WriteLine(new Derivative(function, 'y'));
 
-// MAKE SURE EVERYTHING HAS PARENTHESE, THERE'S NO ORDER OF OPERATIONS
+// MAKE SURE EVERYTHING HAS PARENTHESES, THERE'S NO ORDER OF OPERATIONS AND NO CHAIN RULE
 
 // then type 'dotnet run' in the terminal to see the output
 // you can change tabs to take a look at the files
